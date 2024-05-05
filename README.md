@@ -201,5 +201,84 @@ ZADD high_scores 100 user123
 ZADD high_scores 90 user456
 ```
 
+Exemples de requêtes avec des critères spécifiques :
+```
+// Obtenir la longueur du nom d'utilisateur pour user123 :
+STRLEN username:user123
+
+// Obtenir le nombre d'utilisateurs en ligne :
+LLEN online_users
+
+// Vérifier si user123 a le rôle "admin" :
+SISMEMBER user_roles:user123 admin
+
+// Obtenir le nombre de rôles attribués à user123 :
+SCARD user_roles:user123
+
+// Vérifier si user123 a un champ d'e-mail :
+HEXISTS user:user123 email
+
+// Obtenir le nombre de champs pour user123 :
+HLEN user:user123
+
+// Obtenir le score de user123 dans le jeu de données trié high_scores :
+ZSCORE high_scores user123
+```
+
+# Partie 3 : Intégration de Redis dans un Projet
+
+Préalable : Installer la bibliothèque cliente Redis : Selon votre langage de programmation, vous devrez installer une bibliothèque cliente Redis. Parmi les plus populaires, on trouve redis-py pour Python, redis pour Node.js, et StackExchange.Redis pour C#/.NET.
+
+Exemple pour connecter une BDD Redis à un projet Python en utilisant la bibliothèque `redis-py` :
+```
+import redis
+
+# Establish connection to Redis
+redis_client = redis.StrictRedis(host='localhost', port=6379, db=0)
+
+# Set a value
+redis_client.set('mykey', 'myvalue')
+
+# Get a value
+value = redis_client.get('mykey')
+print(value)
+```
+Remplacez 'localhost' et 6379 par l'hôte et le port appropriés de votre base de données Redis.
+
+
+# Partie 4 : Introspection sur l'Intégration de Redis
+
+Intégrer Redis dans des projets existants peut apporter plusieurs avantages notamment en termes de performances, de scalabilité et de fonctionnalités. 
+
+### Pour les Applications Web en Temps Réel :
+  - On pourrait utiliser Redis comme cache pour stocker des données fréquemment consultées en mémoire, réduisant ainsi les temps de latence et améliorant les performances globales de l'application.
+
+  - Pub/Sub : Exploiter les fonctionnalités de pub/sub de Redis pour mettre en place des communications en temps réel entre les clients et le serveur, idéal pour les applications de chat, les notifications en direct, etc.
+
+  - Sessions Utilisateur : Stocker les sessions utilisateur en mémoire avec Redis pour une gestion efficace des sessions et une répartition de charge plus équilibrée sur les serveurs.
+    
+### Applications E-Commerce :
+
+  - Cache de Catalogue : Mettre en cache les données de catalogue, les informations produit et les résultats de recherche dans Redis pour réduire la charge sur la base de données principale et améliorer les temps de réponse des requêtes.
+
+  - Paniers Utilisateurs : Stocker temporairement les paniers utilisateurs en mémoire avec Redis pour une expérience d'achat fluide et rapide, même en cas de trafic élevé.
+    
+  - Gestion des Stocks : Utiliser des structures de données Redis telles que les ensembles ordonnés pour suivre et gérer efficacement les niveaux de stock en temps réel.
+    
+### Applications Mobiles :
+
+  - Cache Mobile : Intégrer Redis en tant que cache côté serveur pour les applications mobiles afin de réduire les délais de chargement et d'améliorer la réactivité de l'application.
+    
+  - Notifications Push : Utiliser les fonctionnalités de pub/sub de Redis pour gérer les notifications push et les messages en temps réel envoyés aux utilisateurs de l'application.
+    
+  - Gestion de Sessions : Stocker les sessions utilisateur et les informations de connexion en mémoire avec Redis pour une authentification sécurisée et une expérience utilisateur transparente.
+    
+### Applications de Jeux en Ligne :
+  - Cache de Données de Jeu : Utiliser Redis comme cache pour stocker les données de jeu en mémoire, telles que les scores, les classements et les états de jeu, pour des performances optimales et une expérience de jeu fluide.
+    
+  - Messagerie en Temps Réel : Mettre en place un système de messagerie en temps réel avec Redis pour permettre aux joueurs de communiquer, de rejoindre des salons de discussion et de partager des mises à jour en direct.
+    
+  - Gestion de Sessions de Jeu : Stocker les sessions de jeu en mémoire avec Redis pour une transition fluide entre les différentes plates-formes et appareils, garantissant une expérience de jeu cohérente pour les utilisateurs.
+    
 
 

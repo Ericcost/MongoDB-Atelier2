@@ -1,6 +1,6 @@
 # MongoDB-Atelier2
 
-# Partie 1 :
+# Partie 1 : Installation et Configuration du Cluster Redis
 
 ## J'ai choisis de faire un docker-compose.yml
 
@@ -68,13 +68,29 @@ Ensuite il faut run la commande suivante pour créer une ccluster redis :
 docker compose up -d
 ```
 
-Pour se rendre dans la console redis d'une des instances : 
+Dans la mesure où vous ne connaissez pas l'addresse IP du container et/ou le port, veuillez utiliser cette commande pour connaître les valeurs :
+
+```
+sudo docker inspect <container name>
+```
+
+Pour pouvoir ensuite se rendre dans la console redis d'une des instances : 
 ```
 sudo docker exec -it atelier2-redis-node1-1 redis-cli -h 172.20.0.4 -p 7000 
 ```
 
-Dans la mesure où l'addresse IP du container et/ou le port ne sont pas les bons veuillez utiliser cette commande pour connaître les valeurs 
+De là vérifiez qu'il y a bien un cluster : 
+```
+cluster nodes
+fec53df76171a7c13361142b1be4e40420845f86 :7003@17003 myself,master - 0 0 0 connected
+```
 
-# Partie 2 : 
+# Partie 2 : Premiers Pas avec le Cluster Redis
+
+## Injection de données 
+
+De là lorsqu'on essaie d'injecter des données depuis la console redis-cli on obtient une erreur :
+```
+```
 
  
